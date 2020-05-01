@@ -1,13 +1,21 @@
 import React from 'react';
 
-import BudgetList from "./components/budgetlist"
+import Budget from "./components/budget"
+
+
 
 function App() {
+
+
   return (
-    <div className="App">
-     <BudgetList/>
+
+<div className="App">
+
+     <Budget />
+
     </div>
   );
+
 }
 
 export default App;

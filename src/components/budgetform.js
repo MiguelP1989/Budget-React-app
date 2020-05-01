@@ -1,4 +1,7 @@
 import React from "react"
+
+import shortid from "short-id"
+
 import "../components/budgetform.css"
 
 export default class BudgetForm extends React.Component {
@@ -10,6 +13,7 @@ export default class BudgetForm extends React.Component {
 
 }
 handleChange = (e) => {
+
     this.setState({
             [e.target.name]: e.target.value,
 
@@ -18,10 +22,15 @@ handleChange = (e) => {
 
 handleSubmit = (e) =>{
     e.preventDefault()
-this.props.onSubmit({
+    if (!this.state.description || !this.state.number ) {
+            return
+        }
+
+  this.props.onSubmit({
         description: this.state.description,
         number: this.state.number,
-        options: this.state.options
+        options: this.state.options,
+        id: shortid.generate()
 
 
     })
@@ -30,7 +39,7 @@ this.props.onSubmit({
         number: ""
     })
 
-    console.log(this.state);
+    // console.log(this.state);
 
 
 
