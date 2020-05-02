@@ -5,11 +5,11 @@ import "../components/budgetlist.css"
 const  BudgetList = ({inc, exp, totalInc, deleteBudget}) => {
 
 
-
+console.log(exp);
     let percentage;
      let totalPerc = exp.map(curr =>{
         percentage = Math.round((curr.number / totalInc) * 100)
-        return (percentage)
+        return percentage
     })
 
     console.log("buuuu", percentage);
@@ -31,7 +31,7 @@ const  BudgetList = ({inc, exp, totalInc, deleteBudget}) => {
            <div className="right clearfix">
            <div className="item__value">{inc.number}</div>
            <div className="item__delete">
-         <button onClick={deleteBudget(inc.id)} className="item__delete--btn"><i className="ion-ios-close-outline"></i></button>
+         <button onClick={() => deleteBudget(inc.id)} className="item__delete--btn"><i className="ion-ios-close-outline"></i></button>
            </div>
             </div>
            </div>
@@ -51,7 +51,7 @@ const  BudgetList = ({inc, exp, totalInc, deleteBudget}) => {
                 <div className="item__value">{exp.number}</div>
 
                          <div className="item__percentage">
-                         {totalPerc}
+                         {exp.percentage}
 
                          </div>
 

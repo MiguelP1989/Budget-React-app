@@ -7,7 +7,7 @@ import Totals from "../components/totals"
 export default class Budget extends React.Component {
  state = {
       exp: [],
-      inc: [],
+      inc: []
 
 
 
@@ -35,12 +35,11 @@ export default class Budget extends React.Component {
 
 
 handleDeleteBudget = id => {
-    console.log("clicking");
-
     console.log("delete item", `${id}`);
-        // this.setState({
-        //     exp: this.state.exp.filter(budget => budget.id !== id)
-        // })
+    const deleteInc = this.state.inc.filter(budget => budget.id !== id)
+        this.setState({
+            inc: deleteInc
+        })
     }
 
 
@@ -65,7 +64,7 @@ handleDeleteBudget = id => {
      return (
          <div>
              <Totals totalExp={totalExp} totalInc={totalInc}/>
-             <BudgetForm onSubmit={this.addBudget}/>
+             <BudgetForm onSubmit={this.addBudget} totalInc={totalInc}/>
              <BudgetList inc={inc} exp={exp} totalInc={totalInc} deleteBudget={this.handleDeleteBudget} />
 
 

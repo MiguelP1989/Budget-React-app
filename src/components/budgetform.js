@@ -26,18 +26,38 @@ handleSubmit = (e) =>{
             return
         }
 
-  this.props.onSubmit({
-        description: this.state.description,
-        number: this.state.number,
-        options: this.state.options,
-        id: shortid.generate()
+    if ( this.state.options === "exp") {
+    this.props.onSubmit({
+                  description: this.state.description,
+                  number: this.state.number,
+                  options: this.state.options,
+                  id: shortid.generate(),
+                  percentage: this.props.totalInc ? Math.round((this.state.number / this.props.totalInc) * 100) : ""
 
 
-    })
-    this.setState({
-        description:"",
-        number: ""
-    })
+              })
+              this.setState({
+                      description:"",
+                      number: ""
+                  })
+                  return
+    }
+
+
+    this.props.onSubmit({
+              description: this.state.description,
+              number: this.state.number,
+              options: this.state.options,
+              id: shortid.generate(),
+
+          })
+          this.setState({
+                  description:"",
+                  number: ""
+              })
+
+
+
 
     // console.log(this.state);
 
