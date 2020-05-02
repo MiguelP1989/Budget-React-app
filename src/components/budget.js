@@ -8,15 +8,14 @@ export default class Budget extends React.Component {
  state = {
       exp: [],
       inc: [],
-      totalExp: 0
+
+
 
     }
 
  addBudget = (budget) => {
         if (budget.options === "exp") {
             const exp = [budget, ...this.state.exp]
-
-
 
             this.setState({
                 exp: exp
@@ -32,23 +31,42 @@ export default class Budget extends React.Component {
             })
         }
 
-     }
-    ;
+}
+
+
+handleDeleteBudget = id => {
+    console.log("clicking");
+
+    console.log("delete item", `${id}`);
+        // this.setState({
+        //     exp: this.state.exp.filter(budget => budget.id !== id)
+        // })
+    }
+
 
 
 
  render() {
-    let { budget, inc, exp, totalExp } = this.state
+    let {  inc, exp} = this.state
 
-
+    let totalInc = 0
+     inc.map((curr)=> {
+        totalInc += parseInt(curr.number)
+        return totalInc
+    })
+    let totalExp = 0
+    exp.map((curr) =>{
+        totalExp += parseInt(curr.number)
+        return totalExp
+    })
 
 
 
      return (
          <div>
-             <Totals inc={inc} exp={exp}/>
-         <BudgetForm onSubmit={this.addBudget}/>
-             <BudgetList inc={inc} exp={exp}/>
+             <Totals totalExp={totalExp} totalInc={totalInc}/>
+             <BudgetForm onSubmit={this.addBudget}/>
+             <BudgetList inc={inc} exp={exp} totalInc={totalInc} deleteBudget={this.handleDeleteBudget} />
 
 
 

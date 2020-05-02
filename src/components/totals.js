@@ -1,19 +1,16 @@
 import React from "react"
 
 
-const  Totals = ({inc, exp}) => {
+const  Totals = ({totalInc, totalExp}) => {
 
-    let totalInc = 0
-     inc.map((curr)=> {
-        totalInc += parseInt(curr.number)
-        return totalInc
-    })
 
-    let totalExp = 0
-    exp.map((curr) =>{
-        totalExp += parseInt(curr.number)
-        return totalExp
-    })
+    let percentage
+    if (totalInc > 0) {
+      percentage = Math.round(( totalExp / totalInc) * 100) + "%"
+      // example: expense = 100 and income 200, spent 50% =  100/200 = 0.5 * 100
+    } else {
+      percentage = "---";
+    }
 
 
 return (
@@ -38,7 +35,8 @@ return (
          <div className="budget__expenses--text">Expenses</div>
          <div className="right clearfix">
            <div className="budget__expenses--value">{totalExp}</div>
-           <div className="budget__expenses--percentage">45%</div>
+           <div className="budget__expenses--percentage">
+          {percentage}</div>
          </div>
        </div>
      </div>
