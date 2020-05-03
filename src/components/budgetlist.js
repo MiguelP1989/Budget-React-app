@@ -2,19 +2,15 @@ import React from "react"
 import "../components/budgetlist.css"
 
 
-const  BudgetList = ({inc, exp, totalInc, deleteBudget}) => {
+const  BudgetList = ({inc, exp, totalInc, deleteBudget, percentage}) => {
 
 
-console.log(exp);
-    let percentage;
-     let totalPerc = exp.map(curr =>{
-        percentage = Math.round((curr.number / totalInc) * 100)
-        return percentage
-    })
 
-    console.log("buuuu", percentage);
-
-    console.log(totalPerc);
+    console.log("exp", exp);
+    console.log("totalInc", totalInc);
+    if (totalInc[0]) {
+        exp.percentage = percentage
+    }
 
 
     return (
@@ -51,13 +47,14 @@ console.log(exp);
                 <div className="item__value">{exp.number}</div>
 
                          <div className="item__percentage">
+
                          {exp.percentage}
 
                          </div>
 
 
                 <div className="item__delete">
-                <button className="item__delete--btn"><i className="ion-ios-close-outline"></i></button>
+                <button onClick={() => deleteBudget(exp.id)} className="item__delete--btn"><i className="ion-ios-close-outline"></i></button>
                 </div>
                 </div>
                         </div>

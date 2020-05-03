@@ -11,7 +11,9 @@ export default class Budget extends React.Component {
 
 
 
+
     }
+
 
  addBudget = (budget) => {
         if (budget.options === "exp") {
@@ -37,10 +39,29 @@ export default class Budget extends React.Component {
 handleDeleteBudget = id => {
     console.log("delete item", `${id}`);
     const deleteInc = this.state.inc.filter(budget => budget.id !== id)
+    const deleteExp = this.state.exp.filter(budget => budget.id !== id)
         this.setState({
-            inc: deleteInc
+            inc: deleteInc,
+            exp: deleteExp
         })
     }
+
+
+formatNumber = (num) => {
+        console.log("hello");
+           num = num.toFixed(2);
+           let numSplit = num.split(".");
+           let int = numSplit[0];
+           if (int.length > 3) {
+             int =
+               int.substr(0, int.length - 3) +
+               "," +
+               int.substr(int.length - 3, int.length);
+             //input 23510 output 23,510
+           }
+           let dec = numSplit[1]; 
+           return  int + "." + dec;
+         };
 
 
 
@@ -59,13 +80,20 @@ handleDeleteBudget = id => {
         return totalExp
     })
 
+    let percentage
+    if (totalInc > 0) {
+      percentage = Math.round(( totalExp / totalInc) * 100) + "%"
+      // example: expense = 100 and income 200, spent 50% =  100/200 = 0.5 * 100
+    } else {
+      percentage = "---";
+    }
 
 
      return (
          <div>
-             <Totals totalExp={totalExp} totalInc={totalInc}/>
-             <BudgetForm onSubmit={this.addBudget} totalInc={totalInc}/>
-             <BudgetList inc={inc} exp={exp} totalInc={totalInc} deleteBudget={this.handleDeleteBudget} />
+         <Totals totalExp={totalExp} totalInc={totalInc} percentage={percentage} formatNumber={this.formatNumber}/>
+         <BudgetForm onSubmit={this.addBudget} totalInc={totalInc} />
+         <BudgetList inc={inc} exp={exp} totalInc={totalInc} deleteBudget={this.handleDeleteBudget} percentage={percentage}/>
 
 
 
