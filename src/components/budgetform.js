@@ -16,18 +16,14 @@ export default class BudgetForm extends React.Component {
 }
 handleChange = (e) => {
     this.setState({
-            [e.target.name]: e.target.value,
+      [e.target.name]: e.target.value,
+    })
+    if (e.target.name === "options") {
+      return e.target.options.selectedIndex ?
+        this.setState({ style: "red-focus" })
+        : this.setState({ style: "" })
+    }
 
-
-        })
-        if (this.state.options=== "exp") {
-            this.setState({
-            style: "red-focus"
-        })
-                console.log(this.state.style);
-
-
-}
 }
 
 
@@ -38,7 +34,6 @@ handleSubmit = (e) =>{
         }
 
     if ( this.state.options === "exp" ) {
-
 
     this.props.onSubmit({
                   description: this.state.description,
@@ -56,7 +51,7 @@ handleSubmit = (e) =>{
               description: this.state.description,
               number: this.state.number,
               options: this.state.options,
-              id: shortid.generate(),
+              id: shortid.generate()
 
           })
           this.setState({
@@ -90,13 +85,13 @@ return (
             name="description"
             type="text"
             value ={this.state.description}
-            className="add__description"
+            className={`add__description ${this.state.style}`}
             placeholder="Add description"
             onChange={this.handleChange}
           />
           <input type="number"
           name="number"
-          className={this.state.style}
+
           value={this.state.number}
           className="add__value"
           placeholder="Value"

@@ -4,7 +4,7 @@ import "../components/budgetlist.css"
 
 
 
-const  BudgetList = ({inc, exp, totalInc, deleteBudget, percentage, formatNumber}) => {
+const  BudgetList = ({inc, exp, totalInc, deleteBudget, formatNumber}) => {
 
 
 
@@ -14,8 +14,8 @@ const  BudgetList = ({inc, exp, totalInc, deleteBudget, percentage, formatNumber
 
 
     if (exp) {
-        exp.map((item) => {
-            return item.percentage = totalInc ? (Math.round(Number(item.number) / totalInc) * 100) : 0
+        exp.map((items) => {
+            return items.percentage = totalInc ? (Math.round(Number(items.number) / totalInc) * 100) : 0
         })
 
 
@@ -23,7 +23,6 @@ const  BudgetList = ({inc, exp, totalInc, deleteBudget, percentage, formatNumber
 
 
     return (
-//
         <div>
         <div className="container clearfix">
         <div className="income">
