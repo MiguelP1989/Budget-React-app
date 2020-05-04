@@ -8,17 +8,25 @@ export default class BudgetForm extends React.Component {
     state = {
         description: "",
         number: "",
-        options: "inc"
+        options: "inc",
+        style: ""
+
 
 
 }
 handleChange = (e) => {
-
     this.setState({
             [e.target.name]: e.target.value,
 
+
         })
+
+                console.log(this.state.style);
+
+
 }
+
+
 
 handleSubmit = (e) =>{
     e.preventDefault()
@@ -52,18 +60,23 @@ handleSubmit = (e) =>{
                   description:"",
                   number: ""
               })
-
-
-
-
     // console.log(this.state);
 
-
-
+}
+    onFocus = (style) => {
+        if (this.state.options === "exp") {
+            this.setState({
+            style: "red-focus"
+        })
+    }
 }
 render () {
 
+
+
+
 return (
+
     <div>
     <form onSubmit={this.handleSubmit} className="bottom">
       <div className="add">
@@ -73,9 +86,10 @@ return (
           onChange={this.handleChange}
           className="add__type">
             <option value="inc">+</option>
-            <option value="exp">-</option>
+            <option onFocus={()=> this.onFocus(this.state.style)} value="exp">-</option>
           </select>
           <input
+
             name="description"
             type="text"
             value ={this.state.description}

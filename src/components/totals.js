@@ -1,7 +1,7 @@
 import React from "react"
 
 
-const  Totals = ({totalInc, totalExp, percentage}) => {
+const  Totals = ({totalInc, totalExp, percentage, formatNumber}) => {
 
 
     const  displayMounth = () =>{
@@ -24,22 +24,6 @@ const  Totals = ({totalInc, totalExp, percentage}) => {
      return months[month] + " " + year;
     }
 
-    const formatNumber = (num) => {
-            console.log("hello");
-               num = num.toFixed(2);
-               let numSplit = num.split(".");
-               let int = numSplit[0];
-               if (int.length > 3) {
-                 int =
-                   int.substr(0, int.length - 3) +
-                   "," +
-                   int.substr(int.length - 3, int.length);
-                 //input 23510 output 23,510
-               }
-               let dec = numSplit[1];
-               return  int + "." + dec;
-             };
-
 
 
 return (
@@ -50,10 +34,10 @@ return (
          Available Budget in <span className="budget__title--month">{displayMounth()}</span>
        </div>
 
-       {formatNumber(totalInc - totalExp) > 0 ? (
-           <div className="budget__value">{"+ " + formatNumber(totalInc - totalExp)}</div>
+       {(formatNumber(totalInc - totalExp) <= 0 || !totalInc || totalInc < totalExp ) ? (
+           <div className="budget__value">{"- " + formatNumber(totalInc - totalExp)}</div>
        ) : (
-           <div className="budget__value">{"- " + formatNumber(totalInc - totalExp)}</div>)}
+           <div className="budget__value">{"+ " + formatNumber(totalInc - totalExp)}</div>)}
 
        <div className="budget__income clearfix">
          <div className="budget__income--text">Income</div>

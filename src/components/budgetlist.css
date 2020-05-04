@@ -1,17 +1,23 @@
 .container {
-  width: 1000px;
+  /* width: 1000px; */
   margin: 60px auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  width: 100%;
 }
 
 .income {
   float: left;
-  width: 475px;
+  width: 400px;
   margin-right: 50px;
+  margin-bottom: 40px;
 }
 
 .expenses {
   float: left;
-  width: 475px;
+  width: 400px;
 }
 
 h2 {

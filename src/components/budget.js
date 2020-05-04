@@ -4,15 +4,16 @@ import BudgetForm from "../components/budgetform"
 import BudgetList from "../components/budgetlist"
 import Totals from "../components/totals"
 
+import { getExp, setExp } from "../utils";
 export default class Budget extends React.Component {
  state = {
       exp: [],
       inc: []
 
 
-
-
     }
+
+
 
 
  addBudget = (budget) => {
@@ -20,9 +21,9 @@ export default class Budget extends React.Component {
             const exp = [budget, ...this.state.exp]
 
             this.setState({
-                exp: exp
-
-            })
+                exp:exp
+            }
+)
 
 
         } else if (budget.options === "inc") {
@@ -43,25 +44,30 @@ handleDeleteBudget = id => {
         this.setState({
             inc: deleteInc,
             exp: deleteExp
-        })
+        },
+            () => setExp(deleteExp)
+
+
+        )
     }
 
 
-formatNumber = (num) => {
-        console.log("hello");
-           num = num.toFixed(2);
-           let numSplit = num.split(".");
-           let int = numSplit[0];
-           if (int.length > 3) {
-             int =
-               int.substr(0, int.length - 3) +
-               "," +
-               int.substr(int.length - 3, int.length);
-             //input 23510 output 23,510
-           }
-           let dec = numSplit[1]; 
-           return  int + "." + dec;
-         };
+ formatNumber = (num) => {
+
+            num = Math.abs(num)
+               num = num.toFixed(2);
+               let numSplit = num.split(".");
+               let int = numSplit[0];
+               if (int.length > 3) {
+                 int =
+                   int.substr(0, int.length - 3) +
+                   "," +
+                   int.substr(int.length - 3, int.length);
+                 //input 23510 output 23,510
+               }
+               let dec = numSplit[1];
+               return  int + "." + dec;
+             };
 
 
 
@@ -91,9 +97,9 @@ formatNumber = (num) => {
 
      return (
          <div>
-         <Totals totalExp={totalExp} totalInc={totalInc} percentage={percentage} formatNumber={this.formatNumber}/>
+         <Totals totalExp={totalExp} totalInc={totalInc} percentage={percentage} formatNumber={this.formatNumber} />
          <BudgetForm onSubmit={this.addBudget} totalInc={totalInc} />
-         <BudgetList inc={inc} exp={exp} totalInc={totalInc} deleteBudget={this.handleDeleteBudget} percentage={percentage}/>
+         <BudgetList inc={inc} exp={exp} totalInc={totalInc} deleteBudget={this.handleDeleteBudget} percentage={percentage} formatNumber={this.formatNumber}/>
 
 
 
