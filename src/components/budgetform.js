@@ -20,12 +20,15 @@ handleChange = (e) => {
 
 
         })
-
+        if (this.state.options=== "exp") {
+            this.setState({
+            style: "red-focus"
+        })
                 console.log(this.state.style);
 
 
 }
-
+}
 
 
 handleSubmit = (e) =>{
@@ -42,7 +45,7 @@ handleSubmit = (e) =>{
                   number: this.state.number,
                   options: this.state.options,
                   id: shortid.generate(),
-                  percentage: this.props.totalInc ? Math.round((this.state.number / this.props.totalInc) * 100) : "---"
+                  percentage: this.props.totalInc ? Math.round((this.state.number / this.props.totalInc) * 100) : Number(this.state.number)
 
 
               })
@@ -62,13 +65,7 @@ handleSubmit = (e) =>{
               })
     // console.log(this.state);
 
-}
-    onFocus = (style) => {
-        if (this.state.options === "exp") {
-            this.setState({
-            style: "red-focus"
-        })
-    }
+
 }
 render () {
 
@@ -86,7 +83,7 @@ return (
           onChange={this.handleChange}
           className="add__type">
             <option value="inc">+</option>
-            <option onFocus={()=> this.onFocus(this.state.style)} value="exp">-</option>
+            <option className={this.state.style} value="exp">-</option>
           </select>
           <input
 
@@ -99,6 +96,7 @@ return (
           />
           <input type="number"
           name="number"
+          className={this.state.style}
           value={this.state.number}
           className="add__value"
           placeholder="Value"

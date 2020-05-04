@@ -88,10 +88,10 @@ handleDeleteBudget = id => {
 
     let percentage
     if (totalInc > 0) {
-      percentage = Math.round(( totalExp / totalInc) * 100) + "%"
+      percentage = Math.round(( totalExp / totalInc) * 100)
       // example: expense = 100 and income 200, spent 50% =  100/200 = 0.5 * 100
     } else {
-      percentage = "---";
+      percentage = "0";
     }
 
 

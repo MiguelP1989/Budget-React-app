@@ -52,7 +52,7 @@ return (
          <div className="right clearfix">
            <div className="budget__expenses--value">-&nbsp;{formatNumber(totalExp)}</div>
            <div className="budget__expenses--percentage">
-          {percentage}</div>
+          {`${percentage} %`}</div>
          </div>
        </div>
      </div>
